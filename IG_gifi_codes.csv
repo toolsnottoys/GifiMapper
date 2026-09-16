@@ -1,0 +1,60 @@
+Accounting Code,GIFI Code,Column 2
+G11000000,1062,ACCOUNTS RECEIVABLE                
+G17000000,1788,ACCUMULATED AMORTIZATION- FURNITURE
+G17001000,1919,ACCUMULATED AMORTIZATION-LEASEHOLD 
+G60100000,8520,Advertising Expense                
+G61000000,9281,Auto Expenses                      
+G62000000,8715,Bank Charges                       
+B10000000,1000,BANK OF MONTREAL                   
+B23202000,2707,CAPITAL ONE MASTERCARD             
+G63000000,8522,Charitable Contributions           
+G50000000,8320,Cost of Sales                      
+G64000000,8670,Depreciation Expense               
+G30000000,3500,EQUITY - COMMON SHARES             
+G65500000,9275,Freight Expenses                   
+G15000000,1787,FURNITURE AND FITTINGS             
+G66000000,8524,Gifts and Bus Promotion Expense    
+T23101000,2680,HST / COLLECTED                    
+T23102000,2680,HST / GST PAID                     
+G40002000,8000,IG-EMS Sales                       
+G23900000,2680,INCOME TAX PAYABLE                 
+G71600000,9152,Information Technology Expense     
+G67000000,8690,Insurance Expenses                 
+G96700000,8711,Interest & Overdue Expense         
+G15001000,1918,LEASEHOLD IMPROVEMENTS             
+G23208000,3147,Loan Marie Ventura                 
+G23204000,3147,LOAN PAUL VENTURA                  
+G70000000,8960,Maintenance Expense                
+G90650000,8871,MANAGEMENT FEES                    
+G70502000,8520,Marketing Expense                  
+G70500000,8523,Meals and Entertainment            
+G71000000,8810,Office Expenses                    
+G97150000,9281,Parking Expense                    
+B11011000,1062,Payments Received - B              
+G23400000,2628,PAYROLL TAXES PAYABLE              
+G74000000,8910,Rent and Lease                     
+G85000000,8914,Rent Equipment                     
+G35000000,3660,RETAINED EARNINGS                  
+G40000000,8000,Sales                              
+G40015000,8000,SERVICE                            
+G40001000,8000,Service2                           
+G19005000,1242,SHAREHOLDERS LOAN                  
+G70010000,9131,Small Tools/Equipment Expense      
+G75001000,9150,Software Utilities Expense         
+G75502000,9110,Subcontracting Expense             
+G76500000,9225,Telephone Expense                  
+G82000000,8876,Training and Education             
+G82500000,9200,Travel Expense                     
+G77500000,9060,Wages Expense                      
+G75501000,9130,WAREHOUSE SUPPLIES                 
+G75522000,9132,Workshop Supplies Expense          
+G23200000,2624,Wages Payable
+G23205000,3147,LOAN MARIA VENTURA                 
+G23206000,3147,Loan CIIC                          
+G40003000,8000,IG-LED Sales                       
+G40400000,8000,Other Income                       
+G17105000,2011,ACCUMULATED AMORTIZATION - SOFTWARE
+G15201000,2010,SOFTWARE                           
+G23207000,3147,Loan Reginald Nallaratnam          
+G63500000,9061,Commissions and Fees               
+G65000000,8620,Employee Benefit Programs          
