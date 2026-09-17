@@ -8,12 +8,18 @@ namespace GifiMapper
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem menuFile;
         private System.Windows.Forms.ToolStripMenuItem menuFileLoadGifi;
+        private System.Windows.Forms.ToolStripMenuItem menuFileEditGifi;
+        private System.Windows.Forms.ToolStripMenuItem menuFileReloadGifi;
         private System.Windows.Forms.ToolStripMenuItem menuFileLoadTB;
+        private System.Windows.Forms.ToolStripMenuItem menuFileEditTB;
+        private System.Windows.Forms.ToolStripMenuItem menuFileReloadTB;
         private System.Windows.Forms.ToolStripSeparator menuFileSep1;
         private System.Windows.Forms.ToolStripMenuItem menuFileSaveMerged;
         private System.Windows.Forms.ToolStripMenuItem menuFileSaveUnmatched;
+        private System.Windows.Forms.ToolStripMenuItem menuFileExportSummary;
         private System.Windows.Forms.ToolStripMenuItem menuFileExportExcel;
         private System.Windows.Forms.ToolStripMenuItem menuFileExportFutureTax;
+        private System.Windows.Forms.ToolStripMenuItem menuFileViewFutureTax;
         private System.Windows.Forms.ToolStripSeparator menuFileSep2;
         private System.Windows.Forms.ToolStripMenuItem menuFileExit;
         private System.Windows.Forms.ToolStripMenuItem menuHelp;
@@ -24,29 +30,37 @@ namespace GifiMapper
         private System.Windows.Forms.TextBox txtGifiPath;
         private System.Windows.Forms.Button btnBrowseGifi;
         private System.Windows.Forms.Button btnLoadGifi;
+        private System.Windows.Forms.Button btnEditGifi;
+        private System.Windows.Forms.Button btnReloadGifi;
 
         private System.Windows.Forms.GroupBox grpTB;
         private System.Windows.Forms.TextBox txtTBPath;
         private System.Windows.Forms.Button btnBrowseTB;
         private System.Windows.Forms.Button btnLoadTB;
+        private System.Windows.Forms.Button btnEditTB;
+        private System.Windows.Forms.Button btnReloadTB;
 
         private System.Windows.Forms.Panel panelActions;
         private System.Windows.Forms.Button btnMerge;
         private System.Windows.Forms.Button btnSaveMerged;
         private System.Windows.Forms.Button btnSaveUnmatched;
+        private System.Windows.Forms.Button btnExportSummary;
         private System.Windows.Forms.Button btnExportExcel;
         private System.Windows.Forms.Button btnExportFutureTax;
+        private System.Windows.Forms.Button btnViewFutureTax;
         private System.Windows.Forms.Button btnClear;
 
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabGifi;
         private System.Windows.Forms.TabPage tabTB;
         private System.Windows.Forms.TabPage tabMerged;
+        private System.Windows.Forms.TabPage tabSummary;
         private System.Windows.Forms.TabPage tabUnmatched;
 
         private System.Windows.Forms.DataGridView dgvGifi;
         private System.Windows.Forms.DataGridView dgvTB;
         private System.Windows.Forms.DataGridView dgvMerged;
+        private System.Windows.Forms.DataGridView dgvSummary;
         private System.Windows.Forms.DataGridView dgvUnmatched;
 
         private System.Windows.Forms.Panel panelSearch;
@@ -60,6 +74,7 @@ namespace GifiMapper
         private System.Windows.Forms.ToolStripStatusLabel lblTBCount;
         private System.Windows.Forms.ToolStripStatusLabel lblMatchedCount;
         private System.Windows.Forms.ToolStripStatusLabel lblUnmatchedCount;
+        private System.Windows.Forms.ToolStripStatusLabel lblSummaryCount;
         private System.Windows.Forms.ToolStripProgressBar progressBar;
 
         protected override void Dispose(bool disposing)
@@ -85,19 +100,26 @@ namespace GifiMapper
             menuFile = new System.Windows.Forms.ToolStripMenuItem("&File");
 
             menuFileLoadGifi      = new System.Windows.Forms.ToolStripMenuItem("Load &GIFI Mapping File…");
+            menuFileEditGifi      = new System.Windows.Forms.ToolStripMenuItem("&Edit GIFI Mapping File…");
+            menuFileReloadGifi    = new System.Windows.Forms.ToolStripMenuItem("&Reload GIFI Mapping File");
             menuFileLoadTB        = new System.Windows.Forms.ToolStripMenuItem("Load &Trial Balance File…");
+            menuFileEditTB        = new System.Windows.Forms.ToolStripMenuItem("Edit Trial &Balance File…");
+            menuFileReloadTB      = new System.Windows.Forms.ToolStripMenuItem("Reload Trial Balan&ce File");
             menuFileSep1          = new System.Windows.Forms.ToolStripSeparator();
             menuFileSaveMerged    = new System.Windows.Forms.ToolStripMenuItem("Save &Merged CSV…")    { Enabled = false };
             menuFileSaveUnmatched = new System.Windows.Forms.ToolStripMenuItem("Save &Unmatched CSV…") { Enabled = false };
+            menuFileExportSummary = new System.Windows.Forms.ToolStripMenuItem("Save GIFI &Summary CSV…") { Enabled = false };
             menuFileExportExcel   = new System.Windows.Forms.ToolStripMenuItem("&Export to Excel (.xlsx)…") { Enabled = false };
             menuFileExportFutureTax = new System.Windows.Forms.ToolStripMenuItem("Export for &FutureTax (.csv)…") { Enabled = false };
+            menuFileViewFutureTax = new System.Windows.Forms.ToolStripMenuItem("&View FutureTax…") { Enabled = false };
             menuFileSep2          = new System.Windows.Forms.ToolStripSeparator();
             menuFileExit          = new System.Windows.Forms.ToolStripMenuItem("E&xit");
 
             menuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-                menuFileLoadGifi, menuFileLoadTB, menuFileSep1,
-                menuFileSaveMerged, menuFileSaveUnmatched,
-                menuFileExportExcel, menuFileExportFutureTax,
+                menuFileLoadGifi, menuFileEditGifi, menuFileReloadGifi,
+                menuFileLoadTB, menuFileEditTB, menuFileReloadTB, menuFileSep1,
+                menuFileSaveMerged, menuFileSaveUnmatched, menuFileExportSummary,
+                menuFileExportExcel, menuFileExportFutureTax, menuFileViewFutureTax,
                 menuFileSep2, menuFileExit });
 
             menuHelp = new System.Windows.Forms.ToolStripMenuItem("&Help");
@@ -115,17 +137,21 @@ namespace GifiMapper
                 Padding = new System.Windows.Forms.Padding(6, 4, 6, 4)
             };
 
-            grpGifi = new System.Windows.Forms.GroupBox { Text = "GIFI Mapping File",  Left = 8, Top = 8,  Width = 510, Height = 54 };
+            grpGifi = new System.Windows.Forms.GroupBox { Text = "GIFI Mapping File",  Left = 8, Top = 8,  Width = 660, Height = 54 };
             txtGifiPath  = new System.Windows.Forms.TextBox  { Left = 8,   Top = 22, Width = 350, Height = 22, ReadOnly = true, BackColor = System.Drawing.SystemColors.Window, PlaceholderText = "No file selected…" };
             btnBrowseGifi = new System.Windows.Forms.Button  { Left = 364, Top = 21, Width = 65,  Height = 24, Text = "Browse…" };
             btnLoadGifi   = new System.Windows.Forms.Button  { Left = 434, Top = 21, Width = 65,  Height = 24, Text = "Load" };
-            grpGifi.Controls.AddRange(new System.Windows.Forms.Control[] { txtGifiPath, btnBrowseGifi, btnLoadGifi });
+            btnEditGifi   = new System.Windows.Forms.Button  { Left = 504, Top = 21, Width = 65,  Height = 24, Text = "Edit…" };
+            btnReloadGifi = new System.Windows.Forms.Button  { Left = 574, Top = 21, Width = 78,  Height = 24, Text = "Reload" };
+            grpGifi.Controls.AddRange(new System.Windows.Forms.Control[] { txtGifiPath, btnBrowseGifi, btnLoadGifi, btnEditGifi, btnReloadGifi });
 
-            grpTB = new System.Windows.Forms.GroupBox { Text = "Trial Balance File", Left = 8, Top = 68, Width = 510, Height = 54 };
+            grpTB = new System.Windows.Forms.GroupBox { Text = "Trial Balance File", Left = 8, Top = 68, Width = 660, Height = 54 };
             txtTBPath    = new System.Windows.Forms.TextBox  { Left = 8,   Top = 22, Width = 350, Height = 22, ReadOnly = true, BackColor = System.Drawing.SystemColors.Window, PlaceholderText = "No file selected…" };
             btnBrowseTB  = new System.Windows.Forms.Button  { Left = 364, Top = 21, Width = 65,  Height = 24, Text = "Browse…" };
             btnLoadTB    = new System.Windows.Forms.Button  { Left = 434, Top = 21, Width = 65,  Height = 24, Text = "Load" };
-            grpTB.Controls.AddRange(new System.Windows.Forms.Control[] { txtTBPath, btnBrowseTB, btnLoadTB });
+            btnEditTB    = new System.Windows.Forms.Button  { Left = 504, Top = 21, Width = 65,  Height = 24, Text = "Edit…" };
+            btnReloadTB  = new System.Windows.Forms.Button  { Left = 574, Top = 21, Width = 78,  Height = 24, Text = "Reload" };
+            grpTB.Controls.AddRange(new System.Windows.Forms.Control[] { txtTBPath, btnBrowseTB, btnLoadTB, btnEditTB, btnReloadTB });
 
             panelTop.Controls.AddRange(new System.Windows.Forms.Control[] { grpGifi, grpTB });
 
@@ -141,12 +167,14 @@ namespace GifiMapper
             btnMerge           = Btn("▶  Merge",           bx, 100, true);  bx += 108;
             btnSaveMerged      = Btn("💾  Save Merged",     bx, 130, false); bx += 138;
             btnSaveUnmatched   = Btn("📋  Save Unmatched",  bx, 140, false); bx += 148;
+            btnExportSummary   = Btn("Σ  Export Summary",  bx, 150, false); bx += 158;
             btnExportExcel     = Btn("📊  Export Excel",    bx, 130, false); bx += 138;
             btnExportFutureTax = Btn("🍁  FutureTax",       bx, 110, false); bx += 118;
+            btnViewFutureTax   = Btn("👁  View FutureTax",  bx, 140, false); bx += 148;
             btnClear           = Btn("✖  Clear All",        bx, 100, true);
 
             panelActions.Controls.AddRange(new System.Windows.Forms.Control[]
-                { btnMerge, btnSaveMerged, btnSaveUnmatched, btnExportExcel, btnExportFutureTax, btnClear });
+                { btnMerge, btnSaveMerged, btnSaveUnmatched, btnExportSummary, btnExportExcel, btnExportFutureTax, btnViewFutureTax, btnClear });
 
             // Search bar
             panelSearch = new System.Windows.Forms.Panel { Dock = System.Windows.Forms.DockStyle.Top, Height = 34 };
@@ -161,15 +189,17 @@ namespace GifiMapper
             tabGifi      = new System.Windows.Forms.TabPage("📂  GIFI Mapping");
             tabTB        = new System.Windows.Forms.TabPage("📄  Trial Balance");
             tabMerged    = new System.Windows.Forms.TabPage("🔗  Merged Results");
+            tabSummary   = new System.Windows.Forms.TabPage("Σ  GIFI Summary");
             tabUnmatched = new System.Windows.Forms.TabPage("⚠  Unmatched");
 
             dgvGifi      = MakeGrid(); tabGifi.Controls.Add(dgvGifi);
             dgvTB        = MakeGrid(); tabTB.Controls.Add(dgvTB);
             dgvMerged    = MakeGrid(); tabMerged.Controls.Add(dgvMerged);
+            dgvSummary   = MakeGrid(); tabSummary.Controls.Add(dgvSummary);
             dgvUnmatched = MakeGrid(); tabUnmatched.Controls.Add(dgvUnmatched);
 
             tabControl.TabPages.AddRange(new System.Windows.Forms.TabPage[]
-                { tabGifi, tabTB, tabMerged, tabUnmatched });
+                { tabGifi, tabTB, tabMerged, tabSummary, tabUnmatched });
 
             // Status strip
             statusStrip       = new System.Windows.Forms.StatusStrip();
@@ -178,9 +208,10 @@ namespace GifiMapper
             lblTBCount        = SLabel("TB: —");
             lblMatchedCount   = SLabel("Matched: —");
             lblUnmatchedCount = SLabel("Unmatched: —");
+            lblSummaryCount   = SLabel("GIFI codes: —");
             progressBar       = new System.Windows.Forms.ToolStripProgressBar { Visible = false, Width = 120 };
             statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[]
-                { lblStatus, lblGifiCount, lblTBCount, lblMatchedCount, lblUnmatchedCount, progressBar });
+                { lblStatus, lblGifiCount, lblTBCount, lblMatchedCount, lblUnmatchedCount, lblSummaryCount, progressBar });
 
             // Compose form
             this.Controls.Add(tabControl);
